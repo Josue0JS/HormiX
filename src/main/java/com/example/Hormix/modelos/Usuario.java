@@ -22,7 +22,7 @@ public class Usuario {
     private String telefono;
     private String direccion;
     private double saldoDisponible;
-    private String fechaRegistro;
+    private java.time.LocalDate fechaRegistro;
     
     public Usuario() {
     }
@@ -107,11 +107,11 @@ public class Usuario {
         this.saldoDisponible = saldoDisponible;
     }
 
-    public String getFechaRegistro() {
+    public java.time.LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
+    public void setFechaRegistro(java.time.LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
     
