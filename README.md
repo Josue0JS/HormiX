@@ -99,8 +99,8 @@ En desarrollo.
 
 #Autores
 
-Victor Betancur
-Andres Ruiz
-Josue Lorenzo
+* Victor Betancur
+* Andres Ruiz
+* Josue Lorenzo
 
 ---
