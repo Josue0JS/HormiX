@@ -104,3 +104,39 @@ En desarrollo.
 * Josue Lorenzo
 
 ---
+
+# El proyecto utiliza la siguiente estrategia de ramas:
+
+* main → versión estable del proyecto
+
+* develop → rama de integración de nuevas funcionalidades
+
+* feature/nombre-funcionalidad → desarrollo de nuevas características
+
+* hotfix/nombre-fix → correcciones urgentes
+
+# Flujo de trabajo:
+
+* Crear rama desde develop
+
+* Desarrollar funcionalidad
+
+* Hacer commits descriptivos
+
+* Crear Pull Request hacia develop
+
+* Una vez validado, se fusiona
+
+---
+
+# Reglas de Colaboración
+
+No se realizan commits directos a main
+
+Todas las funcionalidades deben pasar por develop
+
+Los commits deben ser descriptivos (ej: feat: registro de gastos)
+
+Cada nueva funcionalidad debe crearse en una rama feature/*
+
+Las fusiones se realizan mediante Pull Request
