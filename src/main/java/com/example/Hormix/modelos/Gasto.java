@@ -1,9 +1,19 @@
 package com.example.Hormix.modelos;
 
+import java.util.List;
+
+import com.example.Hormix.modelos.utils.Estados;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,15 +23,50 @@ public class Gasto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "descripcion", length = 100)
     private String descripcion;
+
+    @Column(name = "fecha")
     private java.time.LocalDate fecha;
+
+    @Column(name = "valor", nullable = false)
     private double valor;
+
+    @Column(name = "icono", length = 100)
     private String icono;
+    
+    @Column(name = "categoria", length = 100)
     private String categoria;
+
+    @Column(name = "metodo_pago", nullable = false, length = 100)
     private String metodoPago;
+
+    @Column(name = "recurrente", nullable = false)
     private boolean recurrente;
-    private String estado;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false)
+    private Estados estado;
+
+    @Column(name = "id_usuario", nullable = false)
     private Integer idUsuario;
+
+
+
+    //Relacion con la tabla usuario
+    //1 gasto 1 usuario
+    @ManyToOne
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
+    private Usuario usuario;
+
+    //Relacion con la tabla categoria
+    @OneToMany(mappedBy = "gasto")
+    private List<Categoria> categorias;
+
+    //relacion con la tabla comercio
+    @OneToMany(mappedBy = "gasto")
+    private List<Comercio> comercios;
 
     public Gasto() {
 
@@ -91,11 +136,11 @@ public class Gasto {
         this.recurrente = recurrente;
     }
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 

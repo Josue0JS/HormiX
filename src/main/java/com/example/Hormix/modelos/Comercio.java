@@ -1,9 +1,11 @@
 package com.example.Hormix.modelos;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,15 +15,38 @@ public class Comercio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "nit", nullable = false, unique = true, length = 20)
     private String nit;
+
+    @Column(name = "nombre", nullable = true, unique = false, length = 100)
     private String nombre;
+
+    @Column(name = "actividad", nullable = true, unique = false, length = 100)
     private String actividad;
+
+    @Column(name = "contacto", nullable = true, unique = false, length = 100)
     private String contacto;
+
+    @Column(name = "direccion", nullable = true, unique = false, length = 200)
     private String direccion;
+
+    @Column(name = "telefono", nullable = true, unique = false, length = 20)
     private String telefono;
+
+    @Column(name = "correo", nullable = true, unique = false, length = 100)
     private String correo;
+
+    @Column(name = "ciudad", nullable = true, unique = false, length = 100)
     private String ciudad;
+
+    @Column(name = "activo", nullable = false)
     private boolean activo;
+
+
+    //Relacion con la tabla gastos
+    @JoinColumn(name = "fk_gasto", referencedColumnName = "id")
+    private Gasto gasto;
 
     public Comercio() {
     }
