@@ -1,9 +1,14 @@
 package com.example.Hormix.modelos;
 
+import com.example.Hormix.modelos.utils.Estados;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,10 +18,23 @@ public class MetodoPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "nombre", nullable = false, unique = false, length = 100)
     private String nombre;
+
+    @Column(name = "franquicia", nullable = true, unique = false, length = 100)
     private String franquicia;
-    private String estado;
+
+    @Column(name = "estado", nullable = true, unique = false, length = 50)
+    private Estados estado;
+
+    @Column(name = "descripcion", nullable = true, length = 200)
     private String descripcion;
+
+    //Relacion con la tabla usuario
+    @ManyToOne()
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
+    private Usuario usuario;
 
 
     public MetodoPago() {
@@ -53,12 +71,12 @@ public class MetodoPago {
     }
 
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 

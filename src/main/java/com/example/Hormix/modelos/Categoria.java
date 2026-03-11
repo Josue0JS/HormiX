@@ -1,9 +1,16 @@
 package com.example.Hormix.modelos;
 
+import com.example.Hormix.modelos.utils.Estados;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,16 +20,40 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "nombre", nullable = false, unique = false, length = 100)
     private String nombre;
+
+    @Column(name = "fecha_creacion", nullable = true, unique = false)
     private java.time.LocalDate fechaCreacion;
+    
+    @Column(name = "responsable", nullable = true, unique = false, length = 100)
     private String responsable;
+    
+    @Column(name = "justificacion", nullable = true, unique = false, length = 200)
     private String justificacion;
+    
+    @Column(name = "descripcion", length = 200)
     private String descripcion;
+    
+    @Column(name = "presupuesto_limite")
     private double presupuestoLimite;
+    
+    @Column(name = "gasto_actual")
     private double gastoActual;
-    private String estado;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false)
+    private Estados estado;
+    
+    @Column(name = "tipo", length = 100)
     private String tipo;
 
+    //Relacion con la tabla gastos
+    // muchos a 1 gastos
+    @ManyToOne()
+    @JoinColumn(name = "fk_gasto", referencedColumnName = "id")
+    private Gasto gasto;
 
     public Categoria() {
     }
@@ -108,12 +139,12 @@ public class Categoria {
     }
 
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 
