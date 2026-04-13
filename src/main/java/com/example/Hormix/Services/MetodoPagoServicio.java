@@ -32,7 +32,7 @@ public class MetodoPagoServicio {
             
             throw new ResponseStatusException(
                 HttpStatus.BAD_REQUEST,
-                "El metodo de pago es obligatorio"
+                "El metodo de pago es obligatorio em"
             );
             
         }
