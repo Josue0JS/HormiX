@@ -6,7 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "comercio")
@@ -45,6 +47,7 @@ public class Comercio {
 
 
     //Relacion con la tabla gastos
+    @ManyToOne
     @JoinColumn(name = "fk_gasto", referencedColumnName = "id")
     private Gasto gasto;
 
@@ -129,6 +132,14 @@ public class Comercio {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+    
+    public Gasto getGasto() {
+        return gasto;
+    }
+
+    public void setGasto(Gasto gasto) {
+        this.gasto = gasto;
     }
     
     

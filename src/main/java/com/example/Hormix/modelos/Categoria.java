@@ -157,6 +157,15 @@ public class Categoria {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Gasto getGasto() {
+        return gasto;
+    }
+
+
+    public void setGasto(Gasto gasto) {
+        this.gasto = gasto;
+    }
     
 
     
