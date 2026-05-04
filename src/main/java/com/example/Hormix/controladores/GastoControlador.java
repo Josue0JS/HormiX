@@ -27,15 +27,10 @@ public class GastoControlador {
 
     //Funcion controladora del servicio de guardar gasto
     @PostMapping
-    public ResponseEntity<?> controladorGuardar(@RequestBody Gasto gasto){
-        try{
-            return ResponseEntity.status(HttpStatus.CREATED).body(
-                servicio.guardar_usuarioGasto(gasto)
-            );
-        }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                "Error al guardar el gasto");
-        }
+    public ResponseEntity<?> controladorGuardar(@RequestBody Gasto datos){
+        return ResponseEntity.status(HttpStatus.OK).body(
+            servicio.guardar_gasto(datos)
+        );
     }
 
     //Funcion controladora del servicio de listar todos los gastos

@@ -19,7 +19,7 @@ public class GastoServicio {
 
     // servicio para guardar un usuario
 
-    public Gasto guardar_usuarioGasto(Gasto datosGasto) {
+    public Gasto guardar_gasto(Gasto datosGasto) {
 
         if (datosGasto.getNombre() == null || datosGasto.getDescripcion().isBlank()) {
             throw new ResponseStatusException(
