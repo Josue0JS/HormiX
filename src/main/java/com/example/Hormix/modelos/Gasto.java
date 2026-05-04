@@ -23,6 +23,9 @@ public class Gasto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @Column(name ="nombre", length = 50)
+    private String nombre;
 
     @Column(name = "descripcion", length = 100)
     private String descripcion;
@@ -78,6 +81,14 @@ public class Gasto {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {

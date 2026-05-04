@@ -1,6 +1,7 @@
 package com.example.Hormix.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,4 +44,48 @@ public class ComercioServicio {
         return repositorio.findAll();
     }
 
+    //servicio para eliminar un comercio en BD
+    public boolean eliminar_comercio(Integer id){
+        Optional<Comercio> comercioBuscado=repositorio.findById(id);
+        if(comercioBuscado.isEmpty()){
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El comercio no existe"
+            );
+        } else{
+            repositorio.deleteById(id);
+            return true;
+        }
+    }
+
+    //Servicio para modificar un comercio en BD
+    public Comercio modificar_comercio(Integer id, Comercio datosComercio){
+        Optional<Comercio> comercioBuscado=repositorio.findById(id);
+        if(comercioBuscado.isEmpty()){
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El comercio no existe"
+            );
+        } else{
+            Comercio comercioModificado=comercioBuscado.get();
+            //defino que campos voy a editar
+            comercioModificado.setNombre(datosComercio.getNombre());
+            comercioModificado.setNit(datosComercio.getNit());
+            comercioModificado.setGasto(datosComercio.getGasto());
+            return repositorio.save(comercioModificado);
+        }
+    }
+
+    //servicio para buscar un comercio por BD
+    public Comercio buscar_por_id(Integer id){
+        Optional<Comercio> comercioBuscado=repositorio.findById(id);
+        if(comercioBuscado.isEmpty()){
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El comercio no existe"
+            );
+        } else{
+            return comercioBuscado.get();
+        }
+    }
 }

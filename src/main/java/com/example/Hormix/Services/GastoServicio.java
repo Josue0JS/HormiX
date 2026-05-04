@@ -1,6 +1,7 @@
 package com.example.Hormix.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,40 +17,74 @@ public class GastoServicio {
     @Autowired
     private IGastoRepositorio repositorio;
 
-        //servicio para guardar un usuario
+    // servicio para guardar un usuario
 
+    public Gasto guardar_usuarioGasto(Gasto datosGasto) {
 
-    public Gasto guardar_usuarioGasto(Gasto datosGasto){
-
-        if(datosGasto.getDescripcion() == null || datosGasto.getDescripcion().isBlank()){
+        if (datosGasto.getNombre() == null || datosGasto.getDescripcion().isBlank()) {
             throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST,
-                "La descripcion del gasto es obligatoria"
-            );
+                    HttpStatus.BAD_REQUEST,
+                    "El nombre y la descripcion del gasto son obligatorios");
         }
 
-                //Despues de las validaciones, intento guardar los datos que me enviaron
+        // Despues de las validaciones, intento guardar los datos que me enviaron
 
-        
-        if(datosGasto.getValor() <= 0){
+        if (datosGasto.getValor() <= 0) {
             throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST,
-                "El valor del gasto debe ser mayor a cero"
-            );
+                    HttpStatus.BAD_REQUEST,
+                    "El valor del gasto debe ser mayor a cero");
         }
 
         return repositorio.save(datosGasto);
     }
 
-        //servicio para listar todos los usuarios en BD
+    // servicio para listar todos los gastos en BD
 
-
-    public List<Gasto> listar_Gastos(){
-        return repositorio.findAll(); 
+    public List<Gasto> listar_Gastos() {
+        return repositorio.findAll();
     }
-        //servicio para elimiar un usuario en BD
 
-    //servicio para modificar un usuario en BD
+    // servicio para eliminar un gasto en BD
+    public boolean eliminar_gasto(Integer id) {
+        Optional<Gasto> gastoBuscado = repositorio.findById(id);
+        if (gastoBuscado.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El gasto no existe");
+        } else {
+            repositorio.deleteById(id);
+            return true;
+        }
+    }
 
-    //servicio para buscar un usuario por BD
+    // servicio para modificar un gasto en BD
+    public Gasto modificar_gasto(Integer id, Gasto datosGasto) {
+        Optional<Gasto> gastoBuscado = repositorio.findById(id);
+        if (gastoBuscado.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El gasto no existe");
+        } else {
+            Gasto gastoExistente = gastoBuscado.get();
+            // defino que campos voy a editar
+            // cambiaremos el nombre del gasto, valor, fecha y descripcion
+            gastoExistente.setNombre(datosGasto.getNombre());
+            gastoExistente.setDescripcion(datosGasto.getDescripcion());
+            gastoExistente.setValor(datosGasto.getValor());
+            gastoExistente.setFecha(datosGasto.getFecha());
+            return repositorio.save(gastoExistente);
+        }
+    }
+
+    // servicio para buscar un gasto por BD
+    public Gasto buscar_por_id(Integer id) {
+        Optional<Gasto> gastoBuscado = repositorio.findById(id);
+        if (gastoBuscado.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El gasto no existe");
+        } else {
+            return gastoBuscado.get();
+        }
+    }
 }

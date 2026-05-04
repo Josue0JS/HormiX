@@ -1,6 +1,7 @@
 package com.example.Hormix.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,9 +47,48 @@ public class UsuarioServicio {
     }
 
     //servicio para elimiar un usuario en BD
+    public boolean eliminar_usuario(Integer id){
+
+        Optional<Usuario> usuarioBuscado=repositorio.findById(id);
+
+        if(usuarioBuscado.isEmpty()){
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El usuario no existe"
+            );
+        } else{
+            repositorio.deleteById(id);
+            return true;
+        }
+    }
 
     //servicio para modificar un usuario en BD
+    public Usuario modificar_usuario(Integer id, Usuario datosNuevos){
+        Optional<Usuario> usuarioBuscado=repositorio.findById(id);
+        if(usuarioBuscado.isEmpty()){
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El usuario no existe");
+        } else{
+            Usuario usuarioExistente=usuarioBuscado.get();
+            //defino que campos voy a editar
+            //cambiemos el nombre
+            usuarioExistente.setNombre(datosNuevos.getNombre());
+            return repositorio.save(usuarioExistente);
+        }
+
+    }
 
     //servicio para buscar un usuario por BD
+    public Usuario buscar_por_id(Integer id){
+        Optional<Usuario> usuarioBuscado=repositorio.findById(id);
+        if(usuarioBuscado.isEmpty()){
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El usuario no existe");
+        } else{
+            return usuarioBuscado.get();
+        }
+    }
 
 }
