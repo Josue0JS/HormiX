@@ -50,6 +50,9 @@ public class Usuario {
     @Column(name = "saldo_disponible", nullable = true, unique = true)
     private double saldoDisponible;
 
+    @Column(name = "password", nullable = false, unique = false, length = 100)
+    private String password;
+
     @Column(name = "fecha_registro")
     private java.time.LocalDate fechaRegistro;
 
@@ -155,8 +158,14 @@ public class Usuario {
     public void setFechaRegistro(java.time.LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
-    
-    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     
 
