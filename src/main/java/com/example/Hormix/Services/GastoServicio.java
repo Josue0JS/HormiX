@@ -59,22 +59,36 @@ public class GastoServicio {
 
     // servicio para modificar un gasto en BD
     public Gasto modificar_gasto(Integer id, Gasto datosGasto) {
-        Optional<Gasto> gastoBuscado = repositorio.findById(id);
-        if (gastoBuscado.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "El gasto no existe");
-        } else {
-            Gasto gastoExistente = gastoBuscado.get();
-            // defino que campos voy a editar
-            // cambiaremos el nombre del gasto, valor, fecha y descripcion
-            gastoExistente.setNombre(datosGasto.getNombre());
-            gastoExistente.setDescripcion(datosGasto.getDescripcion());
-            gastoExistente.setValor(datosGasto.getValor());
-            gastoExistente.setFecha(datosGasto.getFecha());
-            return repositorio.save(gastoExistente);
-        }
+
+    Optional<Gasto> gastoBuscado = repositorio.findById(id);
+
+    if (gastoBuscado.isEmpty()) {
+
+        throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El gasto no existe");
+
+    } else {
+
+        Gasto gastoExistente = gastoBuscado.get();
+
+        // Campos editables
+        gastoExistente.setNombre(datosGasto.getNombre());
+        gastoExistente.setDescripcion(datosGasto.getDescripcion());
+        gastoExistente.setValor(datosGasto.getValor());
+        gastoExistente.setFecha(datosGasto.getFecha());
+
+        // ESTOS FALTABAN
+        gastoExistente.setMetodoPago(datosGasto.getMetodoPago());
+        gastoExistente.setCategoria(datosGasto.getCategoria());
+        gastoExistente.setIcono(datosGasto.getIcono());
+        gastoExistente.setIdUsuario(datosGasto.getIdUsuario());
+        gastoExistente.setRecurrente(datosGasto.isRecurrente());
+        gastoExistente.setEstado(datosGasto.getEstado());
+
+        return repositorio.save(gastoExistente);
     }
+}
 
     // servicio para buscar un gasto por BD
     public Gasto buscar_por_id(Integer id) {
