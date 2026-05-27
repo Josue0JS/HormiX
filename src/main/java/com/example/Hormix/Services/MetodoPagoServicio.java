@@ -1,4 +1,4 @@
-package com.example.Hormix.Services;
+package com.example.Hormix.services;
 
 import java.util.List;
 import java.util.Optional;

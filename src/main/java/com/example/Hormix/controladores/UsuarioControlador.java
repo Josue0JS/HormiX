@@ -1,7 +1,7 @@
 package com.example.Hormix.controladores;
 
-import com.example.Hormix.Services.UsuarioServicio;
 import com.example.Hormix.modelos.Usuario;
+import com.example.Hormix.services.UsuarioServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

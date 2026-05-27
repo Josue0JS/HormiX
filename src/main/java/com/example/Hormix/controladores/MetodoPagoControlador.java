@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Hormix.Services.MetodoPagoServicio;
 import com.example.Hormix.modelos.MetodoPago;
+import com.example.Hormix.services.MetodoPagoServicio;
 
 @RestController
 @RequestMapping("/hormixapi/v1/metodopago")

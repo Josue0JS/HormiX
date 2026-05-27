@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Hormix.Services.ComercioServicio;
 import com.example.Hormix.modelos.Comercio;
+import com.example.Hormix.services.ComercioServicio;
 
 @RestController
 @RequestMapping("/hormixapi/v1/comercios")

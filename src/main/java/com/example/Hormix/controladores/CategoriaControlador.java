@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Hormix.Services.CategoriaServicio;
 import com.example.Hormix.modelos.Categoria;
+import com.example.Hormix.services.CategoriaServicio;
 
 @RestController
 @RequestMapping("/hormixapi/v1/categorias")
