@@ -47,7 +47,7 @@ public class Usuario {
     @Column(name = "direccion", nullable = true, length = 100)
     private String direccion;
 
-    @Column(name = "saldo_disponible", nullable = true, unique = true)
+    @Column(name = "saldo_disponible", nullable = true, unique = false)
     private double saldoDisponible;
 
     @Column(name = "password", nullable = false, unique = false, length = 100)

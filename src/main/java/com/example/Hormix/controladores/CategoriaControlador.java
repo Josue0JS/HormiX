@@ -40,22 +40,22 @@ public class CategoriaControlador {
 
     // funcion controladora del servicio modificar categoria
     @PostMapping("/{id}")
-    public ResponseEntity<?> controladorModificar(@RequestBody Categoria datos) {
+    public ResponseEntity<?> controladorModificar(@PathVariable Integer id, @RequestBody Categoria datos) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                servicio.modificarCategoria(datos.getId(), datos));
+                servicio.modificarCategoria(id, datos));
     }
 
     // funcion controladora del servicio eliminar categoria
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> controladorEliminar(@RequestBody Categoria datos) {
+    public ResponseEntity<?> controladorEliminar(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                servicio.eliminarCategoria(datos.getId()));
+                servicio.eliminarCategoria(id));
     }
 
     // funcion controladora del servicio buscarPorId categoria
     @GetMapping("/{id}")
-    public ResponseEntity<?> controladorBuscarPorId(@RequestBody Categoria datos) {
+    public ResponseEntity<?> controladorBuscarPorId(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                servicio.buscar_por_id(datos.getId()));
+                servicio.buscar_por_id(id));
     }
 }
